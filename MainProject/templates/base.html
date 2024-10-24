@@ -1,0 +1,53 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        Qubits|
+    {% block title %}
+        Home
+    {% endblock %}
+        </title>
+    <style>
+        .nav{
+            background-color: black;
+            color:wheat !important;
+            
+        }
+        .nav>a:visited{
+            color: azure;
+        }
+        .nav>a{
+            color: azure;
+        }
+    {% block style %}
+    
+    {% endblock %}
+</style>
+
+</head>
+<body>
+    <nav
+        class="nav justify-content-center  "
+    >
+        <a class="nav-link " href="/" aria-current="page"
+            > Home</a
+        >
+        <a class="nav-link" href="{% url 'brand_list' %}">Brands</a>
+        <a class="nav-link " href="{% url 'login' %}">Login </a>
+        <a class="nav-link " href="{% url 'register' %}">Register </a>
+        <a class="nav-link"  href="{% url 'add_product' %}">Add Product</a>
+    </nav>
+    
+{% block content %}
+
+<h1>We are in Base .html</h1>
+
+{% endblock %}
+
+
+
+</body>
+</html>

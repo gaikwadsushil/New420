@@ -47,8 +47,8 @@ class Product(models.Model):
     price_inclusive = models.DecimalField(decimal_places=2,max_digits=10)
     description = models.TextField(default='default Description')
     brand = models.ForeignKey(Brand,on_delete=models.CASCADE,null=True)
-    gst_rate = models.DecimalField(max_digits=5,decimal_places=2,default=5.00)
-    hsn_code = models.CharField(max_length=10,default=None)
+    gst_rate = models.DecimalField(max_digits=5,decimal_places=2,default=5.00,blank=True)
+    hsn_code = models.CharField(max_length=10,default='default',blank=True)
     quantity =  models.IntegerField(default=1)
     features = models.JSONField(blank=True)
     # def save(self,commit=False):
