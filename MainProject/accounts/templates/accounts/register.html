@@ -144,32 +144,11 @@ form .signup-link a:hover{
          <div class="title">
             Register Form
          </div>
-         <form action="" method="post">
+         <form action="" method="post" enctype="multipart/form-data" novalidate>
           {% csrf_token %} 
-          {{ csrf_token }}
-            <div class="field">
-               <input type="text"  name="Username" required>
-               <label>Email Address</label>
-            </div>
-            <div class="field">
-               <input type="password" required>
-               <label>Password</label>
-            </div>
-            <div>
-
-            <input type="radio"name="gender" id="" value="MALE">Male<br>
-            <input type="radio"name="gender" id="" value="FEMALE">female<br>
-            <input type="radio"name="gender" id="" value="Other">Other<br>
-            </div>
-            <div>
-              <br><p>Interests</p>
-              <input type="checkbox" name="interest" id="" value="MUSIC">MUSIC <br>
-              <input type="checkbox" name="interest" id="" value="DANCE">DANCE <br>
-              <input type="checkbox" name="interest" id="" value="REDAING">REDAING <br>
-              <input type="checkbox" name="interest" id="" value="PLAYING">PLAYING <br>
-               <input type="checkbox" name="interest" id="" value="CODING">CODING <br>        
-            </div>
-            
+          
+          {{user_form.as_div}} 
+          {{customer_form.as_div}} 
             
             <div class="field">
                <input type="submit" value="Login">

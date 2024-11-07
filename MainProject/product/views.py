@@ -1,7 +1,9 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404
 from .models import Brand
 from django.views import View
 from .models import Product
+from .models import Product,ProductImages
+from .forms import BrandCreationFrom,ProductCreationFrom
 # Create your views here.
 def brand_list(request):
     data= Brand.objects.all()
@@ -31,4 +33,59 @@ class AddProduct(View):
             features=''
             )
         return redirect('/')
+    
+def product_list(request):
+    data= Product.objects.all()
+    context ={
+        'products' : data
+    }
+    return render(request,'product/product_list.html',context)    
+
+
+def product_details(request,id): 
+     product = get_object_or_404(Product,id = id)
+     images = ProductImages.objects.filter(product = product)  
+     
+     context = {
+        'product': product,
+        'images': images
+
+    }
+     return render(request,'product/product_details.html',context)
+
+def update_product(request,id):
+    product = get_object_or_404(Product,id = id)
+    brands=Brand.objects.all()
+    if request.method == 'GET':
+        context = {
+         'product': product,
+         'brands':brands
+     }
+     
+        return render(request,'product/update_product.html',context)
+    elif request.method == 'POST':
+        name = request.POST.get('name')
+        price = request.POST.get('price')
+        description = request.POST.get('description')
+        brand = request.POST.get('brand')
+        product.name =name
+        product.price_inclusive = price
+        product.description = description
+        product.brand = Brand.objects.get(name= brand)
+        product.save()
+        return redirect( 'product_list' )
+
+def add_brand(request):
+    brand_from = BrandCreationFrom()
+    context={
+        'from':brand_from
+    }
+    return render(request,'product/add_brand.html',context)
+
+def add_product_with_django_from(request):
+    product_from = ProductCreationFrom()
+    context={
+        'from':product_from
+    }
+    return render(request,'product/add_product.html',context)
         
