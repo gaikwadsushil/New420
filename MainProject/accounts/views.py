@@ -72,7 +72,7 @@ class Register(View):
           
         return redirect('/')
     
-from django.contrib.auth import authenticate,login
+from django.contrib.auth import authenticate,login,logout
 
 class Login(View):
     def get(self,request):
@@ -90,3 +90,8 @@ class Login(View):
         else:
             messages.error(request,'authentication failure')
             return redirect('login')
+
+
+def logout_user(request):
+    logout(request)
+    return redirect('/')
