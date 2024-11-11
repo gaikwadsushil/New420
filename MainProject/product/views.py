@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect,get_object_or_404
-from .models import Brand
+from .models import Brand,category
 from django.views import View
 from .models import Product
 from .models import Product,ProductImages
@@ -36,10 +36,12 @@ class AddProduct(View):
     
 def product_list(request):
     data= Product.objects.all()
+    categories = category.objects.all()
     context ={
-        'products' : data
+        'products' : data,
+        'categories':categories,
     }
-    return render(request,'product/product_list.html',context)    
+    return render(request,'product/shop.html',context)    
 
 
 def product_details(request,id): 
@@ -87,5 +89,5 @@ def add_product_with_django_from(request):
     context={
         'from':product_from
     }
-    return render(request,'product/add_product.html',context)
+    return render(request,'product/create_product.html',context)
         
